@@ -10,16 +10,16 @@
 - [Conclusion](#conclusion)
 
 
-## **Project Overview**
+### **Project Overview**
 
-This project involves deploying and monitoring a high-interaction SSH honeypot using Cowrie, integrated with a full observability and detection stack. The goal is to capture and analyze malicious SSH activity in real time, understand attacker behavior, and build a scalable detection and visualization pipeline using modern cybersecurity tools.
+This project involves deploying and monitoring a medium-interaction SSH honeypot using Cowrie, integrated with a full observability and detection stack. The goal is to capture and analyze malicious SSH activity in real time, understand attacker behavior, and build a scalable detection and visualization pipeline using modern cybersecurity tools.
 
-## **Architecture**
-The honeypot infrastructure is hosted on a **cloud-based OVH bare metal server** running **Proxmox** as the hypervisor. The internal environment includes:
+### **Architecture**
+The project infrastructure is hosted on a **cloud-based OVH bare metal server** running **Proxmox** as the hypervisor. The internal environment includes:
 
-- A **Cowrie SSH honeypot VM** running Ubuntu Server, with limited outbound traffic allowed only over essential ports (e.g., SSH).
+- A **Cowrie SSH honeypot VM** running on Ubuntu Server, with limited outbound traffic allowed only over essential ports (e.g., SSH).
 - A **Wazuh stack server VM** running the **Wazuh All-in-One Docker deployment**, which includes Wazuh Manager, Elasticsearch, Logstash, and Filebeat.
-- A **management VM** running Ubuntu Desktop for access to the Wazuh Dashboard and Grafana interface.
+- A **management VM** running on Ubuntu Desktop for access to the Wazuh Dashboard and Grafana interface.
 - A **pfSense firewall VM** controlling internal traffic flow to ensure the honeypot remains isolated except for required communication between the Wazuh agent and manager.
 
 ### 2. **Honeypot Configuration**
