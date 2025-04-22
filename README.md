@@ -3,7 +3,7 @@
 
 ## Table of Contents
 
-- [Project Overview](#Project Overview)
+- [Project Overview](#project-overview)
 - [Goals](#goals)
 - [Architecture](#architecture)
 - [Setup](#setup)
