@@ -10,11 +10,11 @@
 - [Conclusion](#conclusion)
 
 
-### **Project Overview**
+## **Project Overview**
 
 This project involves deploying and monitoring a medium-interaction SSH honeypot using Cowrie, integrated with a full observability and detection stack. The goal is to capture and analyze malicious SSH activity in real time, understand attacker behavior, and build a scalable detection and visualization pipeline using modern cybersecurity tools.
 
-### **Architecture**
+## **Architecture**
 The project infrastructure is hosted on a **cloud-based OVH bare metal server** running **Proxmox** as the hypervisor. The internal environment includes:
 
 - A **Cowrie SSH honeypot VM** running on Ubuntu Server, with limited outbound traffic allowed only over essential ports (e.g., SSH).
@@ -22,14 +22,14 @@ The project infrastructure is hosted on a **cloud-based OVH bare metal server** 
 - A **management VM** running on Ubuntu Desktop for access to the Wazuh Dashboard and Grafana interface.
 - A **pfSense firewall VM** controlling internal traffic flow to ensure the honeypot remains isolated except for required communication between the Wazuh agent and manager.
 
-### 2. **Honeypot Configuration**
+### **Honeypot Configuration**
 The honeypot uses **Cowrie**, a medium-to-high interaction SSH honeypot designed to emulate a shell environment. It is configured to:
 
 - **Log both failed and successful login attempts**
 - Record attacker-entered **usernames, passwords, and post-authentication commands**
 - Capture **source IP addresses** for every attempt to enable geolocation and behavioral tracking
 
-### 3. **Wazuh Stack**
+### **Wazuh Stack**
 The detection stack is deployed using the **Wazuh All-in-One** Docker installer. This containerized setup includes:
 
 - **Wazuh Manager** for rule-based alerting
@@ -44,7 +44,7 @@ A custom ruleset was created to detect:
 
 These logs are parsed directly by custom rules, since Cowrie’s JSON format doesn’t align with Wazuh’s default decoders.
 
-### 4. **Log Pipeline**
+### **Log Pipeline**
 Logs follow this path:
 
 1. Cowrie generates JSON logs
@@ -55,7 +55,7 @@ Logs follow this path:
 
 This enrichment allows for geographic and behavioral analysis of attacker IPs directly in both Grafana and the Wazuh Dashboard.
 
-### 5. **Visualization in Grafana**
+### **Visualization in Grafana**
 Instead of Kibana, this project uses **Grafana** with the **Elasticsearch plugin** to create real-time dashboards. Visualizations include:
 
 - Successful vs. failed login attempts
