@@ -37,7 +37,7 @@ The detection stack is deployed using the **Wazuh All-in-One** Docker installer.
 - **Logstash** for log enrichment and filtering
 - **Filebeat** for forwarding alerts
 
-A custom ruleset was created to detect:
+A custom ruleset was created to ingest logs according to:
 - Failed login attempts
 - Successful logins (using Cowrie-accepted credentials)
 - Command execution after login
@@ -54,8 +54,9 @@ Logs follow this path:
 This enrichment allows for geographic and behavioral analysis of attacker IPs directly in both Grafana and the Wazuh Dashboard.
 
 ### **Visualization in Grafana**
-Instead of Kibana, this project uses **Grafana** with the **Elasticsearch plugin** to create real-time dashboards. Visualizations include:
+Instead of Kibana, this project uses **Grafana** with the **Elasticsearch plugin** to create real-time dashboards. Although Kibana is commonly used with Elasticsearch, I chose Grafana for this project because my team at work is planning to adopt it soon. I wanted to get ahead by becoming familiar with the tool, and this project gave me a practical use case to start exploring its capabilities.
 
+Visualizations include:
 - Successful vs. failed login attempts
 - Top attempted usernames
 - Commands entered by attackers
