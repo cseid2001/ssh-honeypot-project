@@ -4,7 +4,7 @@
 ## Table of Contents
 
 - [Project Overview](#project-overview)
-- [Architecture](#lab-environment)
+- [Lab Environment](#lab-environment)
 - [Setup](#setup)
 - [Logs and Analysis](#logs-and-analysis)
 - [Conclusion](#conclusion)
