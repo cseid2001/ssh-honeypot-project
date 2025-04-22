@@ -42,15 +42,13 @@ A custom ruleset was created to detect:
 - Successful logins (using Cowrie-accepted credentials)
 - Command execution after login
 
-These logs are parsed directly by custom rules, since Cowrie’s JSON format doesn’t align with Wazuh’s default decoders.
-
 ### **Log Pipeline**
 Logs follow this path:
 
 1. Cowrie generates JSON logs
 2. Wazuh Agent forwards logs to Wazuh Manager
 3. Filebeat ships alert data to Logstash
-4. **Logstash enriches logs with GeoIP metadata**
+4. Logstash enriches logs with GeoIP metadata
 5. Logs are indexed in Elasticsearch for query and visualization
 
 This enrichment allows for geographic and behavioral analysis of attacker IPs directly in both Grafana and the Wazuh Dashboard.
