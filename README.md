@@ -1,6 +1,16 @@
 
 # Cowrie SSH Honeypot + Wazuh SIEM Stack Project
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Goals](#goals)
+- [Architecture](#architecture)
+- [Setup](#setup)
+- [Logs and Analysis](#logs-and-analysis)
+- [Conclusion](#conclusion)
+
+
 ## **Project Overview**
 
 This project involves deploying and monitoring a high-interaction SSH honeypot using Cowrie, integrated with a full observability and detection stack. The goal is to capture and analyze malicious SSH activity in real time, understand attacker behavior, and build a scalable detection and visualization pipeline using modern cybersecurity tools.
