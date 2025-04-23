@@ -38,7 +38,7 @@ The detection and monitoring system is deployed using the **Wazuh All-in-One Doc
 - **Filebeat** – Forwards alert data from Wazuh Manager to Logstash  
 - **Logstash** – Enriches log data before indexing it in Elasticsearch
 - **Wazuh Dashboard** – Web interface built on Kibana for visualizing alerts, agent status, and logs  
-- **Grafana** *(optional)* – Used to build real-time custom dashboards with data from Elasticsearch
+- **Grafana** *(Added to replace Kibana)* – Used to build real-time custom dashboards with data from Elasticsearch
 
 A custom ruleset was created to ingest logs according to:
 - Failed login attempts
