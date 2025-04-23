@@ -7,7 +7,7 @@
 
 - [Project Overview](#project-overview)
 - [Lab Environment](#lab-environment)
-- [Logs and Analysis](#logs-and-analysis)
+- [Attacker Behavior & Investigation](#attacker-behavior-&-investigation)
 - [Conclusion](#conclusion)
 
 
