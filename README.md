@@ -26,7 +26,7 @@ The project infrastructure is hosted on a **cloud-based OVH bare metal server** 
 The honeypot uses **Cowrie**, a medium-to-high interaction SSH honeypot designed to emulate a shell environment. It logs attacker activity such as:
 
 - **Both failed and successful login attempts**
-- Attacker-entered **usernames, passwords, and post-authentication commands**
+- Attempted **usernames, passwords, and post-authentication commands**
 - **Source IP addresses** for every attempt
 
 ### **Wazuh Stack**
@@ -45,19 +45,18 @@ A custom ruleset was created to ingest logs according to:
 ### **Log Pipeline**
 Logs follow this path:
 
-1. Cowrie generates JSON logs
-2. Wazuh Agent forwards logs to Wazuh Manager
-3. Filebeat ships alert data to Logstash
-4. Logstash enriches logs with GeoIP metadata
-5. Logs are indexed in Elasticsearch for query and visualization
+1. Cowrie generates structured logs (e.g., cowrie.json) that record all activity.
+2. The Wazuh Agent, installed on the honeypot VM, reads Cowrie’s log files and forwards them to the Wazuh Manager.
+3. The Wazuh Manager parses the logs using our custom rules to generate alerts.
+4. Alerts and enriched log data are sent to Elasticsearch for indexing (This enrichment allows for geographic and behavioral analysis of attacker IPs).
+5. Dashboards (Grafana or Wazuh’s own dashboard) query Elasticsearch to visualize the data.
 
-This enrichment allows for geographic and behavioral analysis of attacker IPs directly in both Grafana and the Wazuh Dashboard.
 
 ### **Visualization in Grafana**
 Instead of Kibana, this project uses **Grafana** with the **Elasticsearch plugin** to create real-time dashboards. Although Kibana is commonly used with Elasticsearch, I chose Grafana for this project because my team at work is planning to adopt it soon. I wanted to get ahead by becoming familiar with the tool, and this project gave me a practical use case to start exploring its capabilities.
 
 Visualizations include:
-- Successful vs. failed login attempts
+- Successful and failed login attempts
 - Top attempted usernames
 - Commands entered by attackers
 - Geolocation map of source IPs
