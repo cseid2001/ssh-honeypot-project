@@ -78,10 +78,11 @@ The honeypot has been running for one week (currently on day 4), capturing live 
 
 ### 134.209.120.69 
 
+This attack most likely came from a bot considering the speed of the commands entered and the fact that I can find this attack replicated online.
+The bot ran multiple commands that:
 - Attempted to identify whether the system was a **router**, **SMS server**, or **crypto mining node**
 - Searched for pre-existing malware or mining processes
-- Issued a command to test if the environment was a **real shell**
-- Upon realizing it was likely simulated, the attacker disconnected
+- Issued a command to test if the environment was a functioning shell
 
 Some of the more interesting commands they tried to execute include:
 
@@ -96,7 +97,7 @@ Some of the more interesting commands they tried to execute include:
 Purpose: Lists running processes and checks if a cryptocurrency miner is already running. 
 Why a malicious user uses it: 
 - To check if the system is already infected with a crypto miner. 
-- To avoid conflict with another attacker's miner (yes, attacker rivalry is real). 
+- To avoid conflict with another attacker's miner.
 - To possibly kill competing miners and install their own.
 
 **ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/* **
@@ -135,9 +136,3 @@ This allows them to potentially:
 This is common on IoT devices, industrial routers, and small embedded systems that get exposed to the internet (often unintentionally). 
 
 
-
-
-The next sections will dive deeper into:
-- Command breakdowns by attacker
-- Source IP enrichment and geo-profiling
-- Potential goals behind each interaction
