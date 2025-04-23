@@ -54,6 +54,8 @@ Logs follow this path:
 4. Alerts and enriched log data are sent to Elasticsearch for indexing (This enrichment allows for geographic and behavioral analysis of attacker IPs).
 5. Dashboards (Grafana or Wazuh’s own dashboard) query Elasticsearch to visualize the data.
 
+   ![Diagram](Architecture-Diagram.png)
+
 
 ### **Visualization in Grafana**
 Instead of Kibana, this project uses **Grafana** with the **Elasticsearch plugin** to create real-time dashboards. Although Kibana is commonly used with Elasticsearch, I chose Grafana for this project because my team at work is planning to adopt it soon. I wanted to get ahead by becoming familiar with the tool, and this project gave me a practical use case to start exploring its capabilities.
