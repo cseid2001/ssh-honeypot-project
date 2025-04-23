@@ -76,13 +76,66 @@ Visualizations include:
 
 The honeypot has been running for one week (currently on day 4), capturing live attack data. In this section, I will investigate specific IP addresses, analyze command sequences, and attempt to infer attacker intent based on behavior.
 
-### Initial Findings
-One attacker session has stood out due to its depth and reconnaissance techniques:
+### 134.209.120.69 
 
 - Attempted to identify whether the system was a **router**, **SMS server**, or **crypto mining node**
 - Searched for pre-existing malware or mining processes
 - Issued a command to test if the environment was a **real shell**
 - Upon realizing it was likely simulated, the attacker disconnected
+
+Some of the more interesting commands they tried to execute include:
+
+**/ip cloud print**
+  
+  Purpose: This command is not a standard Linux command. It's actually a command specific to MikroTik RouterOS. 
+  What it does: It prints the public IP address and other cloud settings of the MikroTik device. 
+  Why a malicious user uses it: If your server is running MikroTik RouterOS, this would help the attacker identify the external IP address of the device. 
+
+**ps | grep '[Mm]iner'**
+
+Purpose: Lists running processes and checks if a cryptocurrency miner is already running. 
+Why a malicious user uses it: 
+- To check if the system is already infected with a crypto miner. 
+- To avoid conflict with another attacker's miner (yes, attacker rivalry is real). 
+- To possibly kill competing miners and install their own.
+
+**ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/* **
+
+This one was long so I broke it down into multiple parts.
+
+**/dev/ttyGSM*, /dev/modem*, /dev/ttyUSB-mod***
+
+What it is: These are device files typically associated with modems — especially GSM (cellular) or USB-based LTE sticks. 
+Why they care: If the attacker finds a GSM modem, they might try to: 
+- Send or receive SMS messages. 
+- Exploit the modem to gain data connectivity. 
+- Use the device for SMS spamming, phishing, or OTP interception. 
+
+**/var/spool/sms/*, /var/log/smsd.log, /etc/smsd.conf*, /var/config/sms/* **
+
+What it is: These paths are associated with SMS server software, especially smstools. Smstools allows a server to send/receive SMS messages via a connected modem. 
+Why they care: They're checking if your server is acting as an SMS gateway. If so, they might try to hijack it to send bulk spam, fraud messages, or phishing attacks. 
+
+**/usr/bin/qmuxd, /var/qmux_connect_socket, /etc/config/simman **
+
+What it is: qmuxd is a daemon used in Qualcomm-based modems for managing communication between the OS and the cellular modem (via QMI). simman likely refers to SIM management tools on embedded Linux systems or routers. 
+Why they care: They’re trying to detect a cellular router or embedded system (like OpenWRT with a SIM card). These are often misconfigured or insecure, and attackers can abuse the mobile data and SMS functions. 
+
+**Why would someone run this? **
+
+This command is part of a targeted script that checks if your system: 
+- Has a SIM card or LTE modem. 
+- Is running an SMS gateway or cellular router setup. 
+
+This allows them to potentially:
+- Send spam SMS. 
+- Intercept or forward OTPs (e.g., MFA codes). 
+- Use your mobile data plan or IP address for shady traffic. 
+
+This is common on IoT devices, industrial routers, and small embedded systems that get exposed to the internet (often unintentionally). 
+
+
+
 
 The next sections will dive deeper into:
 - Command breakdowns by attacker
