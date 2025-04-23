@@ -30,12 +30,15 @@ The honeypot uses **Cowrie**, a medium-to-high interaction SSH honeypot designed
 - **Source IP addresses** for every attempt
 
 ### **Wazuh Stack**
-The detection stack is deployed using the **Wazuh All-in-One** Docker installer. This containerized setup includes:
 
-- **Wazuh Manager** for rule-based alerting
-- **Elasticsearch** for log indexing and storage
-- **Logstash** for log enrichment and filtering
-- **Filebeat** for forwarding alerts
+The detection and monitoring system is deployed using the **Wazuh All-in-One Docker installer**, which sets up a complete SIEM stack in a containerized environment. This stack integrates components from the **Wazuh platform** and the **Elastic Stack**, providing centralized log collection, enrichment, alerting, storage, and visualization.
+
+- **Wazuh Manager** – Collects log data from agents, applies decoders and rules, and generates alerts  
+- **Elasticsearch** – Stores structured log and alert data for search, correlation, and visualization  
+- **Filebeat** – Forwards alert data from Wazuh Manager to Logstash  
+- **Logstash** – Enriches log data before indexing it in Elasticsearch
+- **Wazuh Dashboard** – Web interface built on Kibana for visualizing alerts, agent status, and logs  
+- **Grafana** *(optional)* – Used to build real-time custom dashboards with data from Elasticsearch
 
 A custom ruleset was created to ingest logs according to:
 - Failed login attempts
@@ -45,7 +48,7 @@ A custom ruleset was created to ingest logs according to:
 ### **Log Pipeline**
 Logs follow this path:
 
-1. Cowrie generates structured logs (e.g., cowrie.json) that record all activity.
+1. Cowrie generates structured logs that record all activity.
 2. The Wazuh Agent, installed on the honeypot VM, reads Cowrie’s log files and forwards them to the Wazuh Manager.
 3. The Wazuh Manager parses the logs using our custom rules to generate alerts.
 4. Alerts and enriched log data are sent to Elasticsearch for indexing (This enrichment allows for geographic and behavioral analysis of attacker IPs).
