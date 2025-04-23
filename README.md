@@ -5,7 +5,6 @@
 
 - [Project Overview](#project-overview)
 - [Lab Environment](#lab-environment)
-- [Setup](#setup)
 - [Logs and Analysis](#logs-and-analysis)
 - [Conclusion](#conclusion)
 
