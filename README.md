@@ -23,11 +23,11 @@ The project infrastructure is hosted on a **cloud-based OVH bare metal server** 
 - A **pfSense firewall VM** controlling internal traffic flow to ensure the honeypot remains isolated except for required communication between the Wazuh agent and manager.
 
 ### **Honeypot Configuration**
-The honeypot uses **Cowrie**, a medium-to-high interaction SSH honeypot designed to emulate a shell environment. It is configured to:
+The honeypot uses **Cowrie**, a medium-to-high interaction SSH honeypot designed to emulate a shell environment. It logs attacker activity such as:
 
-- **Log both failed and successful login attempts**
-- Record attacker-entered **usernames, passwords, and post-authentication commands**
-- Capture **source IP addresses** for every attempt to enable geolocation and behavioral tracking
+- **Both failed and successful login attempts**
+- Attacker-entered **usernames, passwords, and post-authentication commands**
+- **Source IP addresses** for every attempt
 
 ### **Wazuh Stack**
 The detection stack is deployed using the **Wazuh All-in-One** Docker installer. This containerized setup includes:
