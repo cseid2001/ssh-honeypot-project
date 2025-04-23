@@ -24,9 +24,9 @@ The project infrastructure is hosted on a **cloud-based OVH bare metal server** 
 ### **Honeypot Configuration**
 The honeypot uses **Cowrie**, a medium-to-high interaction SSH honeypot designed to emulate a shell environment. It logs attacker activity such as:
 
-- **Both failed and successful login attempts**
-- Attempted **usernames, passwords, and post-authentication commands**
-- **Source IP addresses** for every attempt
+- Both failed and successful login attempts
+- Attempted usernames, passwords, and post-authentication commands
+- Source IP addresses** for every attempt
 
 ### **Wazuh Stack**
 
