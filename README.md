@@ -1,6 +1,8 @@
 
 # Cowrie SSH Honeypot + Wazuh SIEM Stack Project
 
+![Map](traffic-map.png)
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
