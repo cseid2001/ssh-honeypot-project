@@ -78,6 +78,7 @@ The honeypot has been running for one week (currently on day 4), capturing live 
 
 ### 134.209.120.69 
 
+According to abuseipd.com, this is a known malicious ip with over 100 reports. They seem to be leveraging the cloud as the IP is a digital ocean IP which makes me believe that they are running out of the Digital Ocean cloud.
 This attack most likely came from a bot considering the speed of the commands entered and the fact that I can find this attack replicated online.
 The bot ran multiple commands that:
 - Attempted to identify whether the system was a **router**, **SMS server**, or **crypto mining node**
@@ -100,11 +101,11 @@ Why a malicious user uses it:
 - To avoid conflict with another attacker's miner.
 - To possibly kill competing miners and install their own.
 
-**ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/* **
+**ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/**
 
-This one was long so I broke it down into multiple parts.
+This one was a long ls command so I broke it down into multiple parts.
 
-**/dev/ttyGSM*, /dev/modem*, /dev/ttyUSB-mod***
+/dev/ttyGSM*, /dev/modem*, /dev/ttyUSB-mod*
 
 What it is: These are device files typically associated with modems — especially GSM (cellular) or USB-based LTE sticks. 
 Why they care: If the attacker finds a GSM modem, they might try to: 
@@ -112,12 +113,12 @@ Why they care: If the attacker finds a GSM modem, they might try to:
 - Exploit the modem to gain data connectivity. 
 - Use the device for SMS spamming, phishing, or OTP interception. 
 
-**/var/spool/sms/*, /var/log/smsd.log, /etc/smsd.conf*, /var/config/sms/* **
+/var/spool/sms/*, /var/log/smsd.log, /etc/smsd.conf*, /var/config/sms/* 
 
 What it is: These paths are associated with SMS server software, especially smstools. Smstools allows a server to send/receive SMS messages via a connected modem. 
 Why they care: They're checking if your server is acting as an SMS gateway. If so, they might try to hijack it to send bulk spam, fraud messages, or phishing attacks. 
 
-**/usr/bin/qmuxd, /var/qmux_connect_socket, /etc/config/simman **
+/usr/bin/qmuxd, /var/qmux_connect_socket, /etc/config/simman 
 
 What it is: qmuxd is a daemon used in Qualcomm-based modems for managing communication between the OS and the cellular modem (via QMI). simman likely refers to SIM management tools on embedded Linux systems or routers. 
 Why they care: They’re trying to detect a cellular router or embedded system (like OpenWRT with a SIM card). These are often misconfigured or insecure, and attackers can abuse the mobile data and SMS functions. 
