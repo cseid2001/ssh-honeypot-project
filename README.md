@@ -87,13 +87,13 @@ The bot ran multiple commands that:
 
 Some of the more interesting commands they tried to execute include:
 
-**/ip cloud print**
+`/ip cloud print`
   
   Purpose: This command is not a standard Linux command. It's actually a command specific to MikroTik RouterOS. 
   What it does: It prints the public IP address and other cloud settings of the MikroTik device. 
   Why a malicious user uses it: If your server is running MikroTik RouterOS, this would help the attacker identify the external IP address of the device. 
 
-**ps | grep '[Mm]iner'**
+`ps | grep '[Mm]iner'`
 
 Purpose: Lists running processes and checks if a cryptocurrency miner is already running. 
 Why a malicious user uses it: 
@@ -101,11 +101,11 @@ Why a malicious user uses it:
 - To avoid conflict with another attacker's miner.
 - To possibly kill competing miners and install their own.
 
-**"ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*"**
+`ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*`
 
 This one was a long ls command so I broke it down into multiple parts.
 
-/dev/ttyGSM*, /dev/modem*, /dev/ttyUSB-mod*
+`/dev/ttyGSM*, /dev/modem*, /dev/ttyUSB-mod*`
 
 What it is: These are device files typically associated with modems — especially GSM (cellular) or USB-based LTE sticks. 
 Why they care: If the attacker finds a GSM modem, they might try to: 
@@ -113,12 +113,12 @@ Why they care: If the attacker finds a GSM modem, they might try to:
 - Exploit the modem to gain data connectivity. 
 - Use the device for SMS spamming, phishing, or OTP interception. 
 
-/var/spool/sms/*, /var/log/smsd.log, /etc/smsd.conf*, /var/config/sms/* 
+`/var/spool/sms/*, /var/log/smsd.log, /etc/smsd.conf*, /var/config/sms/* `
 
 What it is: These paths are associated with SMS server software, especially smstools. Smstools allows a server to send/receive SMS messages via a connected modem. 
 Why they care: They're checking if your server is acting as an SMS gateway. If so, they might try to hijack it to send bulk spam, fraud messages, or phishing attacks. 
 
-/usr/bin/qmuxd, /var/qmux_connect_socket, /etc/config/simman 
+`/usr/bin/qmuxd, /var/qmux_connect_socket, /etc/config/simman `
 
 What it is: qmuxd is a daemon used in Qualcomm-based modems for managing communication between the OS and the cellular modem (via QMI). simman likely refers to SIM management tools on embedded Linux systems or routers. 
 Why they care: They’re trying to detect a cellular router or embedded system (like OpenWRT with a SIM card). These are often misconfigured or insecure, and attackers can abuse the mobile data and SMS functions. 
