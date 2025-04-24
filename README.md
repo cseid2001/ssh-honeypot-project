@@ -101,7 +101,7 @@ Why a malicious user uses it:
 - To avoid conflict with another attacker's miner.
 - To possibly kill competing miners and install their own.
 
-**ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/**
+**"ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*"**
 
 This one was a long ls command so I broke it down into multiple parts.
 
