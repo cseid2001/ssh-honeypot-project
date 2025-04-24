@@ -108,7 +108,7 @@ This command tried to list the files in multiple directories. The directories it
 
 `/dev/ttyGSM*, /dev/modem*, /dev/ttyUSB-mod*`
 
-What it is: These are device files typically associated with modems — especially GSM (cellular) or USB-based LTE sticks. 
+What it is: These are device files typically associated with modems — especially GSM (cellular) or USB-based LTE sticks. <br>
 Why a malicious user may use it: If the attacker finds a GSM modem, they might try to: 
 - Send or receive SMS messages. 
 - Exploit the modem to gain data connectivity. 
