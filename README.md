@@ -96,7 +96,7 @@ Some of the more interesting commands they tried to execute include:
 
 `ps | grep '[Mm]iner'`
 
-Purpose: Lists running processes and checks if a cryptocurrency miner is already running. 
+Purpose: Lists running processes and checks if a cryptocurrency miner is already running. <br>
 Why a malicious user may use it: 
 - To check if the system is already infected with a crypto miner. 
 - To avoid conflict with another attacker's miner.
@@ -116,7 +116,7 @@ Why a malicious user may use it: If the attacker finds a GSM modem, they might t
 
 `/var/spool/sms/*, /var/log/smsd.log, /etc/smsd.conf*, /var/config/sms/* `
 
-What it is: These paths are associated with SMS server software, especially smstools. Smstools allows a server to send/receive SMS messages via a connected modem. 
+What it is: These paths are associated with SMS server software, especially smstools. Smstools allows a server to send/receive SMS messages via a connected modem. <br>
 Why a malicious user may use it: They're checking if your server is acting as an SMS gateway. If so, they might try to hijack it to send bulk spam, fraud messages, or phishing attacks. 
 
 `/usr/bin/qmuxd, /var/qmux_connect_socket, /etc/config/simman `
