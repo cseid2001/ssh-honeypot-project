@@ -3,6 +3,8 @@
 
 ![Map](traffic-map.png)
 
+[7-day snapshot Grafana Dashboard](https://snapshots.raintank.io/dashboard/snapshot/2XZWh2LJEX8AE1ycGr2aEUjxaSU41uuu)
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
