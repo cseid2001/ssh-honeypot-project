@@ -90,8 +90,8 @@ Some of the more interesting commands they tried to execute include:
 
 `/ip cloud print`
   
-  Purpose: This command is not a standard Linux command. It's actually a command specific to MikroTik RouterOS. 
-  What it does: It prints the public IP address and other cloud settings of the MikroTik device. 
+  Purpose: This command is not a standard Linux command. It's actually a command specific to MikroTik RouterOS. <br>
+  What it does: It prints the public IP address and other cloud settings of the MikroTik device. <br>
   Why a malicious user may use it: If your server is running MikroTik RouterOS, this would help the attacker identify the external IP address of the device. 
 
 `ps | grep '[Mm]iner'`
