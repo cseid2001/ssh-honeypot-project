@@ -104,7 +104,7 @@ Why a malicious user may use it:
 
 `ls -la /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf* /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*`
 
-This one was a long ls command so I broke it down into multiple parts.
+This command tried to list the files in multiple directories. The directories it was interested in was very interesting:
 
 `/dev/ttyGSM*, /dev/modem*, /dev/ttyUSB-mod*`
 
