@@ -122,7 +122,6 @@ Why a malicious user may use it: They're checking if your server is acting as an
 `/usr/bin/qmuxd, /var/qmux_connect_socket, /etc/config/simman `
 
 What it is: qmuxd is a daemon used in Qualcomm-based modems for managing communication between the OS and the cellular modem (via QMI). simman likely refers to SIM management tools on embedded Linux systems or routers. 
-
 Why a malicious user may use it: This command is part of a targeted script that checks if your system: 
 - Has a SIM card or LTE modem. 
 - Is running an SMS gateway or cellular router setup. 
