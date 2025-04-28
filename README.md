@@ -18,7 +18,7 @@
 This project involves deploying and monitoring a medium-interaction SSH honeypot using Cowrie, integrated with a centralized security monitoring and log analysis stack based on Wazuh and the Elastic Stack. The goal is to capture and analyze malicious SSH activity in real time, understand attacker behavior, and build a system to detect and visualize threats with modern cybersecurity tools.
 
 ## **Lab Environment**
-The project infrastructure is hosted on a **cloud-based OVH bare metal server** running **Proxmox** as the hypervisor. The internal environment includes:
+The project infrastructure is hosted on a cloud-based OVH bare metal server running Proxmox as the hypervisor. The internal environment includes:
 
 - A **Cowrie SSH honeypot VM** running on Ubuntu-24.04 Live Server, with limited outbound traffic allowed only over essential ports (e.g., SSH and Wazuh communication).
 - A **Wazuh stack server VM** running the Wazuh All-in-One Docker deployment, which includes Wazuh Manager, Elasticsearch, Logstash, and Filebeat.
@@ -26,7 +26,7 @@ The project infrastructure is hosted on a **cloud-based OVH bare metal server** 
 - A **pfSense firewall VM** controlling internal traffic flow to ensure the honeypot remains isolated except for required communication between the Wazuh agent and manager.
 
 ### **Honeypot Configuration**
-The honeypot uses **Cowrie**, a medium-to-high interaction SSH honeypot designed to emulate a shell environment. It logs attacker activity such as:
+The honeypot uses Cowrie, a medium-to-high interaction SSH honeypot designed to emulate a shell environment. It logs attacker activity such as:
 
 - Both failed and successful login attempts
 - Attempted usernames, passwords, and post-authentication commands
