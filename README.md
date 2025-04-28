@@ -34,7 +34,7 @@ The honeypot uses Cowrie, a medium-to-high interaction SSH honeypot designed to 
 
 ### **Wazuh Stack**
 
-The detection and monitoring system is deployed using the **Wazuh All-in-One Docker installer**, which sets up a complete SIEM stack in a containerized environment. This stack integrates components from the **Wazuh platform** and the **Elastic Stack**, providing centralized log collection, enrichment, alerting, storage, and visualization.
+The detection and monitoring system is deployed using the Wazuh All-in-One Docker installer, which sets up a complete SIEM stack in a containerized environment. This stack integrates components from the Wazuh platform and the Elastic Stack, providing centralized log collection, enrichment, alerting, storage, and visualization.
 
 - **Wazuh Manager** – Collects log data from agents, applies decoders and rules, and generates alerts.  
 - **Elasticsearch** – Stores structured log and alert data for search, correlation, and visualization.  
