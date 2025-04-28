@@ -48,6 +48,8 @@ A custom ruleset was created to ingest logs according to:
 - Successful logins (using Cowrie-accepted credentials)
 - Command execution after login
 
+![rules](wazuh-rules.png)
+
 ### **Log Pipeline**
 Logs follow this path:
 
