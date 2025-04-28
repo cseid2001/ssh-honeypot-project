@@ -83,7 +83,7 @@ According to abuseipdb.com, this is a know malicious ip with over 14,000 reports
 This attack most likely came from a bot considering the speed of the commands entered and the fact that I can find this attack replicated online.
 
 The bot ran multiple commands that:
-- Attempted to identify whether the system was a **router**, **SMS server**, or **crypto mining node**
+- Attempted to identify whether the system was a router, SMS server, or crypto mining node
 - Searched for pre-existing malware or mining processes
 - Issued a command to test if the environment was a functioning shell
 
@@ -164,7 +164,7 @@ Why the /tmp directory? The /tmp directory is typically world-writable (meaning 
 
 `./U8uoKz7J`
 
-Purpose: This script may have been executed as a form of redundancy. Since the honeypot ssh shell is a fake shell, they would not be able to sucessfullu run their script. They may have decided to try running the script directly to see if that would work.
+Purpose: This script may have been executed as a form of redundancy. Since the honeypot ssh shell is a fake shell, they would not be able to sucessfully run their script. They may have decided to try running the script directly to see if that would work.
 
 
 ## Conclusion
