@@ -72,7 +72,6 @@ Visualizations include:
 - Attack volume by country
 - Unique IPs per region
 
----
 
 ## **Attacker Behavior & Investigation**
 
@@ -163,9 +162,14 @@ Purpose: The scp protocol is being used to try and copy a file from the attacker
 Purpose: This script tries to move the newly copied file to the /tmp directory, give it execute permissions, then run it.
 Why the /tmp directory? The /tmp directory is typically world-writable (meaning any user on the system can write to it) and has relaxed permissions, allowing files to be created, modified, and executed by anyone. This makes it an ideal place to put malicious scripts or binaries when trying to avoid more restricted parts of the filesystem.
 
+`./U8uoKz7J`
+
+Purpose: This script may have been executed as a form of redundancy. Since the honeypot ssh shell is a fake shell, they would not be able to sucessfullu run their script. They may have decided to try running the script directly to see if that would work.
+
+
 ## Conclusion
 
 
 
-Purpose: This script may have been executed as a form of redundancy. Since the honeypot ssh shell is a fake shell, they would not be able to sucessfullu run their script. They may have decided to try running the script directly to see if that would work.
+
 
