@@ -21,7 +21,7 @@ This project involves deploying and monitoring a medium-interaction SSH honeypot
 The project infrastructure is hosted on a cloud-based OVH bare metal server running Proxmox as the hypervisor. The internal environment includes:
 
 - A **Cowrie SSH honeypot VM** running on Ubuntu-24.04 Live Server, with limited outbound traffic allowed only over essential ports (e.g., SSH and Wazuh communication).
-- A **Wazuh stack server VM** running the Wazuh All-in-One Docker deployment, which includes Wazuh Manager, Elasticsearch, Logstash, and Filebeat.
+- A **Wazuh Elastic Stack VM** running the Wazuh All-in-One Docker deployment, which includes Wazuh Manager, Elasticsearch, Logstash, and Filebeat.
 - A **management VM** running on Ubuntu-24.04 Desktop for access to the Wazuh Dashboard and Grafana interface.
 - A **pfSense firewall VM** controlling internal traffic flow to ensure the honeypot remains isolated except for required communication between the Wazuh agent and manager.
 
