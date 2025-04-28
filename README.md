@@ -63,7 +63,7 @@ Logs follow this path:
 
 
 ### **Visualization in Grafana**
-Instead of Kibana, this project uses **Grafana** with the **Elasticsearch plugin** to create real-time dashboards. Although Kibana is commonly used with Elasticsearch, I chose Grafana for this project because my team at work is planning to adopt it soon and I wanted to get ahead by becoming familiar with the tool. This project gave me a practical use case to start exploring its capabilities.
+Instead of Kibana, this project uses Grafana with the Elasticsearch plugin to create real-time dashboards. Although Kibana is commonly used with Elasticsearch, I chose Grafana for this project because my team at work is planning to adopt it soon and I wanted to get ahead by becoming familiar with the tool. This project gave me a practical use case to start exploring its capabilities.
 
 Visualizations include:
 - Successful and failed login attempts
