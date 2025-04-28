@@ -171,7 +171,9 @@ Purpose: This script may have been executed as a form of redundancy. Since the h
 
 This project provided valuable hands-on experience in both deploying a honeypot and integrating it with a SIEM solution. By setting up Cowrie and Wazuh, I was able to capture real-world attack data, gain insights into common attacker behaviors, and strengthen my skills in log analysis, threat detection, and system hardening.
 
-Going forward, I plan to expand on this lab by incorporating other types of honeypots, refining alerting rules, and experimenting with threat intelligence integration to build a more complete view of attacker tactics, techniques, and procedures (TTPs). Overall, this lab has not only enhanced my technical skills but also emphasized the critical role of proactive monitoring and deception in modern cybersecurity.
+Going forward, I plan to expand on this lab by incorporating other types of honeypots (Dinoaea really caught my eye), refining alerting rules, and experimenting with threat intelligence integration to build a more complete view of attacker tactics, techniques, and procedures (TTPs). 
+
+Overall, this lab has not only enhanced my technical skills but also emphasized the critical role of proactive monitoring in modern cybersecurity.
 
 
 
